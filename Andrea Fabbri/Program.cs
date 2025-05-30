@@ -2,7 +2,6 @@ public sealed class GestoreSpese
 {
     private static GestoreSpese _instance;
     private static readonly object _lock = new object();
-    //TODO INSERIRE QUI LISTA PER LE COSE DA GESTIRE (SPESA)
     private List<Spesa> spese = new List<Spesa>();
     private GestoreSpese() { }
     public static GestoreSpese Instance
@@ -22,7 +21,7 @@ public sealed class GestoreSpese
             return _instance;
         }
     }
-    public void SalvaSpesa(SpeseFamiglia spese)
+    public void SalvaSpesa(Spesa spesa)
     {
         spese.Add(spesa)
     }
