@@ -2,19 +2,51 @@
 
 public abstract class Spesa
 {
-    public decimal Prezzo;
-    public string Descrizione;
+    private decimal _prezzo;
+    private string _descrizione;
+    private string _utente;
 
-    public Spesa(decimal prezzo, string descrizione)
+    public decimal Prezzo
+    {
+        get { return _prezzo; }
+        set
+        {
+            if (value >= 0)
+            {
+                _prezzo = value;
+            }
+        }
+    }
+
+    public string Descrizione
+    {
+        get { return _descrizione; }
+        set { _descrizione = value;}
+    }
+
+    public string Utente
+    {
+        get { return _utente; }
+        set
+        {
+            if (value.ToLower() == "madre" || value.ToLower() == "padre")
+            {
+                _utente = value;
+            }
+        }
+    }
+
+    public Spesa(decimal prezzo, string descrizione, string utente)
     {
         Prezzo = prezzo;
         Descrizione = descrizione;
+        Utente = utente;
     }
 }
 
 public class Bollette : Spesa
 {
-    public Bollette(decimal prezzo, string descrizione) : base(prezzo, descrizione) { }
+    public Bollette(decimal prezzo, string descrizione, string utente) : base(prezzo, descrizione, utente) { }
 
     public override string ToString()
     {
@@ -24,7 +56,7 @@ public class Bollette : Spesa
 
 public class Alimentari : Spesa
 {
-    public Alimentari(decimal prezzo, string descrizione) : base(prezzo, descrizione) { }
+    public Alimentari(decimal prezzo, string descrizione, string utente) : base(prezzo, descrizione, utente) { }
 
     public override string ToString()
     {
@@ -34,7 +66,7 @@ public class Alimentari : Spesa
 
 public class Mutuo : Spesa
 {
-    public Mutuo(decimal prezzo, string descrizione) : base(prezzo, descrizione) { }
+    public Mutuo(decimal prezzo, string descrizione, string utente) : base(prezzo, descrizione, utente) { }
 
     public override string ToString()
     {
@@ -44,7 +76,7 @@ public class Mutuo : Spesa
 
 public class Spesina : Spesa
 {
-    public Spesina(decimal prezzo, string descrizione) : base(prezzo, descrizione) { }
+    public Spesina(decimal prezzo, string descrizione, string utente) : base(prezzo, descrizione, utente) { }
 
     public override string ToString()
     {
@@ -54,21 +86,21 @@ public class Spesina : Spesa
 
 public static class SpesaFactory
 {
-    public static Spesa CreaSpesa(string tipo, decimal prezzo, string descrizione)
+    public static Spesa CreaSpesa(string tipo, decimal prezzo, string descrizione, string utente)
     {
         switch (tipo.ToLower())
         {
             case "bollette":
-                return new Bollette(prezzo, descrizione);
+                return new Bollette(prezzo, descrizione, utente);
 
             case "alimentari":
-                return new Alimentari(prezzo, descrizione);
+                return new Alimentari(prezzo, descrizione, utente);
 
             case "mutuo":
-                return new Mutuo(prezzo, descrizione);
+                return new Mutuo(prezzo, descrizione, utente);
 
             case "spesina":
-                return new Spesina(prezzo, descrizione);
+                return new Spesina(prezzo, descrizione, utente);
 
             default:
                 Console.WriteLine("Tipo di spesa non valido.");
