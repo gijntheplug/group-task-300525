@@ -151,7 +151,7 @@ public class NotificaMadre : IObserver
 {
     public void Update(Spesa s)
     {
-        Console.WriteLine($"Mamma ha inserito: {s.ToString()}");
+        Console.WriteLine($"Notifica a madre: {s.ToString()}");
     }
 }
 
@@ -159,7 +159,7 @@ public class NotificaPadre : IObserver
 {
     public void Update(Spesa s)
     {
-        Console.WriteLine($"Papà ha inserito: {s.ToString()}");
+        Console.WriteLine($"Notifica a padre: {s.ToString()}");
     }
 }
 
